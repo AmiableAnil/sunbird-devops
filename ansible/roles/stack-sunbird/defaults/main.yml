@@ -618,18 +618,18 @@ nodebb_liveness_readiness:
   healthcheck: true
   readinessProbe:
     httpGet:
-      path: /discussions/api/forum/health
+      path: /discussions/api/category/2
       port: 4567
-    initialDelaySeconds: 180
+    initialDelaySeconds: 45
     periodSeconds: 15
     timeoutSeconds: 5
     failureThreshold: 2
     successThreshold: 1
   livenessProbe:
     httpGet:
-      path: /discussions/api/forum/health
+      path: /discussions/api/category/2
       port: 4567
-    initialDelaySeconds: 180
+    initialDelaySeconds: 45
     periodSeconds: 15
     timeoutSeconds: 5
     failureThreshold: 2
@@ -902,7 +902,7 @@ uci_orchestrator_liveness_readiness:
     httpGet:
       path: /service/health
       port: 8686
-    initialDelaySeconds: 15
+    initialDelaySeconds: 60
     periodSeconds: 15
     timeoutSeconds: 5
     failureThreshold: 2
@@ -911,7 +911,7 @@ uci_orchestrator_liveness_readiness:
     httpGet:
       path: /service/health
       port: 8686
-    initialDelaySeconds: 15
+    initialDelaySeconds: 60
     periodSeconds: 15
     timeoutSeconds: 5
     failureThreshold: 2
