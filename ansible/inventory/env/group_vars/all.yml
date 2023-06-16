@@ -168,7 +168,7 @@ keyclaok_deployer_sudo_pass: "{{core_vault_keyclaok_deployer_sudo_pass}}"
 keycloak_password: "{{core_vault_keycloak_password}}"
 
 #Content Service Vars
-sunbird_content_repo_api_base_url: "http://{{learningservice_ip}}:8080/userorg-service"
+sunbird_content_repo_api_base_url: "http://{{learningservice_ip}}:8080/learning-service"
 sunbird_content_repo_api_key: "{{ core_vault_sunbird_api_auth_token }}"
 sunbird_search_service_api_key: "{{ core_vault_sunbird_api_auth_token }}"
 sunbird_dial_repo_api_key: "{{ core_vault_sunbird_api_auth_token }}"
