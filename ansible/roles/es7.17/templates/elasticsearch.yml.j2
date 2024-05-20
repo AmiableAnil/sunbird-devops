@@ -57,3 +57,4 @@ network.host: 0.0.0.0
 reindex.remote.whitelist: {{es_remote_host}}:9200
 {% endif %}
 
+discovery.type: {{ es_etc_discovery_type | default('single-node') }}
