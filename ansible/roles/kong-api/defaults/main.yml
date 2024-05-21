@@ -274,27 +274,6 @@ kong_apis:
     config.required: false
     config.enabled: false
 
-- name: assignRole
-  uris: "{{ user_service_prefix }}/v1/role/assign"
-  upstream_url: "{{ userorg_service_url }}/v1/user/assign/role"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userAdmin
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: true
-    config.enabled: true
-
 - name: assignRoleV2
   uris: "{{ user_service_prefix }}/v2/role/assign"
   upstream_url: "{{ userorg_service_url }}/v2/user/assign/role"
@@ -1011,111 +990,6 @@ kong_apis:
     config.required: false
     config.enabled: false
 
-- name: createUser
-  uris: "{{ user_service_prefix }}/v1/create"
-  upstream_url: "{{ userorg_service_url }}/v1/user/create"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userCreate
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
-- name: createUserLearnerV3
-  uris: "{{ user_service_prefix }}/v1/signup"
-  upstream_url: "{{ userorg_service_url }}/v1/user/signup"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userCreate
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
-- name: createUserVersion2
-  uris: "{{ user_service_prefix }}/v2/create"
-  upstream_url: "{{ userorg_service_url }}/v2/user/create"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userCreate
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
-- name: createUserVersion3
-  uris: "{{ user_service_prefix }}/v3/create"
-  upstream_url: "{{ userorg_service_url }}/v3/user/create"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userCreate
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
-- name: createUserVersion4
-  uris: "{{ user_service_prefix }}/v4/create"
-  upstream_url: "{{ userorg_service_url }}/v4/user/create"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
 - name: deleteNote
   uris: "{{ notes_service_prefix }}/v1/delete"
   upstream_url: "{{ userorg_service_url }}/v1/note/delete"
@@ -1406,27 +1280,6 @@ kong_apis:
     config.required: false
     config.enabled: false
 
-- name: generateOtp
-  uris: "{{ otp_service_prefix }}/v1/generate"
-  upstream_url: "{{ userorg_service_url }}/v1/otp/generate"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - anonymousUserAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
 - name: generateOtpV2
   uris: "{{ otp_service_prefix }}/v2/generate"
   upstream_url: "{{ userorg_service_url }}/v2/otp/generate"
@@ -1612,27 +1465,6 @@ kong_apis:
     config.required: false
     config.enabled: false
 
-- name: getUserByKey
-  uris: "{{ user_service_prefix }}/v1/get"
-  upstream_url: "{{ userorg_service_url }}/v1/user/get"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - anonymousUserAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
 - name: getUserByKeyV2
   uris: "{{ user_service_prefix }}/v2/get"
   upstream_url: "{{ userorg_service_url }}/v2/user/get"
@@ -1653,48 +1485,6 @@ kong_apis:
   - name: opa-checks
     config.required: false
     config.enabled: false
-
-- name: getUserProfile
-  uris: "{{ user_service_prefix }}/v1/read"
-  upstream_url: "{{ userorg_service_url }}/v1/user/read"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: true
-    config.enabled: true
-
-- name: getUserProfileV2
-  uris: "{{ user_service_prefix }}/v2/read"
-  upstream_url: "{{ userorg_service_url }}/v2/user/read"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: true
-    config.enabled: true
 
 - name: indexSync
   uris: "{{ data_service_prefix }}/v1/index/sync"
@@ -2506,27 +2296,6 @@ kong_apis:
   - name: acl
     config.whitelist:
     - contentSuperAdmin
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
-- name: privateUserAssignRole
-  uris: "{{ user_service_prefix }}/private/v1/assign/role"
-  upstream_url: "{{ userorg_service_url }}/private/user/v1/assign/role"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userSuperAdmin
   - name: rate-limiting
     config.policy: local
     config.hour: "{{ medium_rate_limit_per_hour }}"
@@ -3710,61 +3479,6 @@ kong_apis:
     config.required: false
     config.enabled: false
 
-- name: searchOrgExtended
-  uris: "{{ org_service_prefix }}/v1/ext/search"
-  upstream_url: "{{ userorg_service_url }}/v1/org/search"
-  strip_uri: true
-  plugins:
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: ip
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
-- name: searchOrg
-  uris: "{{ org_service_prefix }}/v1/search"
-  upstream_url: "{{ userorg_service_url }}/v1/org/search"
-  strip_uri: true
-  plugins:
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: ip
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
-- name: searchUser
-  uris: "{{ user_service_prefix }}/v1/search"
-  upstream_url: "{{ userorg_service_url }}/v1/user/search"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userTempAdmin
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
 - name: sendEmailNotification
   uris: "{{ user_service_prefix }}/v1/notification/email"
   upstream_url: "{{ userorg_service_url }}/v1/notification/email"
@@ -4374,27 +4088,6 @@ kong_apis:
     config.required: false
     config.enabled: false
 
-- name: updateUser
-  uris: "{{ user_service_prefix }}/v1/update"
-  upstream_url: "{{ userorg_service_url }}/v1/user/update"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userUpdate
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ medium_request_size_limit }}"
-  - name: opa-checks
-    config.required: true
-    config.enabled: true
-
 - name: uploadContent
   uris: "{{ content_prefix }}/v1/upload"
   upstream_url: "{{ knowledge_mw_service_url }}/v1/content/upload"
@@ -4479,114 +4172,9 @@ kong_apis:
     config.required: false
     config.enabled: false
 
-- name: userExistenceApi
-  uris: "{{ user_service_prefix }}/v1/exists"
-  upstream_url: "{{ userorg_service_url }}/v1/user/exists"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - anonymousUserAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
 - name: userExistenceApiV2
   uris: "{{ user_service_prefix }}/v2/exists"
   upstream_url: "{{ userorg_service_url }}/v2/user/exists"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
-- name: userFeed
-  uris: "{{ user_service_prefix }}/v1/feed"
-  upstream_url: "{{ userorg_service_url }}/v1/user/feed"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: true
-    config.enabled: true
-
-- name: userFeedCreate
-  uris: "{{ user_service_prefix }}/feed/v1/create"
-  upstream_url: "{{ userorg_service_url }}/v1/user/feed/create"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
-- name: userFeedDelete
-  uris: "{{ user_service_prefix }}/feed/v1/delete"
-  upstream_url: "{{ userorg_service_url }}/v1/user/feed/delete"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
-- name: userFeedUpdate
-  uris: "{{ user_service_prefix }}/feed/v1/update"
-  upstream_url: "{{ userorg_service_url }}/v1/user/feed/update"
   strip_uri: true
   plugins:
   - name: jwt
@@ -4637,27 +4225,6 @@ kong_apis:
   - name: acl
     config.whitelist:
     - anonymousCertificateAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
-
-- name: verifyOtp
-  uris: "{{ otp_service_prefix }}/v1/verify"
-  upstream_url: "{{ userorg_service_url }}/v1/otp/verify"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - anonymousUserAccess
   - name: rate-limiting
     config.policy: local
     config.hour: "{{ medium_rate_limit_per_hour }}"
@@ -5235,27 +4802,6 @@ kong_apis:
     config.required: false
     config.enabled: false
 
-- name: getUserProfileV3
-  uris: "{{ user_service_prefix }}/v3/read"
-  upstream_url: "{{ userorg_service_url }}/v3/user/read"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: true
-    config.enabled: true
-
 - name: updateUserDeclarations
   uris: "{{ user_service_prefix }}/v1/declarations"
   upstream_url: "{{ userorg_service_url }}/v1/user/declarations"
@@ -5288,27 +4834,6 @@ kong_apis:
   - name: acl
     config.whitelist:
     - userUpdate
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ medium_request_size_limit }}"
-  - name: opa-checks
-    config.required: true
-    config.enabled: true
-
-- name: readUserConsent
-  uris: "{{ user_service_prefix }}/v1/consent/read"
-  upstream_url: "{{ userorg_service_url }}/v1/user/consent/read"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userAccess
   - name: rate-limiting
     config.policy: local
     config.hour: "{{ medium_rate_limit_per_hour }}"
@@ -7254,27 +6779,6 @@ kong_apis:
     config.required: false
     config.enabled: false
 
-- name: updateUserV2
-  uris: "{{ user_service_prefix }}/v2/update"
-  upstream_url: "{{ userorg_service_url }}/v2/user/update"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userUpdate
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ medium_request_size_limit }}"
-  - name: opa-checks
-    config.required: true
-    config.enabled: true
-
 - name: questionImportAPI
   uris: "{{ question_prefix }}/v1/import"
   upstream_url: "{{ assessment_service_url }}/question/v4/import"
@@ -7295,27 +6799,6 @@ kong_apis:
   - name: opa-checks
     config.required: false
     config.enabled: false
-
-- name: managedUserV1Create
-  uris: "{{ user_service_prefix }}/v1/managed/create"
-  upstream_url: "{{ userorg_service_url }}/v1/manageduser/create"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ medium_request_size_limit }}"
-  - name: opa-checks
-    config.required: true
-    config.enabled: true
 
 - name: managedUserV2Create
   uris: "{{ user_service_prefix }}/v2/managed/create"
@@ -7380,27 +6863,6 @@ kong_apis:
     config.required: false
     config.enabled: false
 
-- name: getUserProfileV4
-  uris: "{{ user_service_prefix }}/v4/read"
-  upstream_url: "{{ userorg_service_url }}/v4/user/read"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userAccess
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: true
-    config.enabled: true
-
 - name: getUserProfileV5
   uris: "{{ user_service_prefix }}/v5/read"
   upstream_url: "{{ userorg_service_url }}/v5/user/read"
@@ -7421,27 +6883,6 @@ kong_apis:
   - name: opa-checks
     config.required: true
     config.enabled: true
-
-- name: searchUserV2
-  uris: "{{ user_service_prefix }}/v2/search"
-  upstream_url: "{{ userorg_service_url }}/v2/user/search"
-  strip_uri: true
-  plugins:
-  - name: jwt
-  - name: cors
-  - "{{ statsd_pulgin }}"
-  - name: acl
-    config.whitelist:
-    - userTempAdmin
-  - name: rate-limiting
-    config.policy: local
-    config.hour: "{{ medium_rate_limit_per_hour }}"
-    config.limit_by: credential
-  - name: request-size-limiting
-    config.allowed_payload_size: "{{ small_request_size_limit }}"
-  - name: opa-checks
-    config.required: false
-    config.enabled: false
 
 - name: searchUserV3
   uris: "{{ user_service_prefix }}/v3/search"
