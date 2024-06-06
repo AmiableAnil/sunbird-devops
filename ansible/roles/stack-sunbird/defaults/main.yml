@@ -1070,3 +1070,7 @@ cloud_store_base_path_placeholder: "CLOUD_BASE_PATH"
 youtube_app_name: fetch-youtube-license
 youtube_api_key: "{{ lp_vault_youtube_api_key }}"
 pgssl: "false"
+
+#Knowlg Release-6.1.0
+dailcode_keyspace_name: "dialcodes"
+cloud_storage_dial_container_name: "dial"
