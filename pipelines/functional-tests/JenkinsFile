@@ -25,11 +25,11 @@ node() {
                 jobName = sh(returnStdout: true, script: "echo $JOB_NAME").split('/')[-1].trim()
                 stage('deploy artifact'){
                     sh """
-                rm -rf test_repo
-                git clone ${params.test_repo} -b ${params.test_repo_branch_or_tag} test_repo
+                    rm -rf test_repo
+                    git clone ${params.test_repo} -b ${params.test_repo_branch_or_tag} test_repo
                     """
                     ansiblePlaybook = "${currentWs}/ansible/functional-tests.yml"
-                    ansibleExtraArgs = "--extra-vars \" source_name=${currentWs}/test_repo/functional-tests/${params.file_version} inquiry_api_version=${params.inquiry_api_version} file_version=${params.file_version} inquiry_host_url=${params.inquiry_host_url} inquiry_channel_id=${params.inquiry_channel_id}  \" --vault-password-file /var/lib/jenkins/secrets/vault-pass"  
+                    ansibleExtraArgs = "--extra-vars \" source_name=${currentWs}/test_repo/functional-tests/${params.file_version} inquiry_api_version=${params.inquiry_api_version} file_version=${params.file_version} inquiry_host_url=${params.inquiry_host_url} inquiry_channel_id=${params.inquiry_channel_id} inquiry_framework_id=${params.inquiry_framework_id}  \" --vault-password-file /var/lib/jenkins/secrets/vault-pass"  
                     values.put('currentWs', currentWs)
                     values.put('env', envDir)
                     values.put('module', module)

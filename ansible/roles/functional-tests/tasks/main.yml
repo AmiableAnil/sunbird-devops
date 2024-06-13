@@ -12,7 +12,9 @@
   template:
     src: "{{ source_name }}/env_question_questionset_{{ file_version }}.json"
     dest: functional-tests-files/env_question_questionset_{{ file_version }}.json
-- name: Trigger Functional Test 
+- name: Trigger Functional Test
+  environment:
+    NVM_DIR: "/var/lib/jenkins/.nvm"
   shell:
-    cmd: newman run ft_question_questionset_{{ file_version }}.json -e env_question_questionset_{{ file_version }}.json --reporters cli,htmlextra,junit --reporter-htmlextra-export newman/report.html --reporter-junit-export newman/junit_report.xml ; chown -R jenkins:jenkins newman
+    cmd: . /var/lib/jenkins/.nvm/nvm.sh && nvm use 16.19.0 &&  newman run ft_question_questionset_{{ file_version }}.json -e env_question_questionset_{{ file_version }}.json --reporters cli,htmlextra,junit --reporter-htmlextra-export newman/report.html --reporter-junit-export newman/junit_report.xml;
     chdir: functional-tests-files
