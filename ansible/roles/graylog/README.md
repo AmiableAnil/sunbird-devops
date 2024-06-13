@@ -30,7 +30,7 @@ Be certain you are running a supported version of Elasticsearch. You can configu
 
 | Graylog version   | 3.x |    4.x     |
 |:--------------|:-------------:|:----------:|
-| Elasticsearch | 5-6 | 6.8 - 7.17 |
+| Elasticsearch | 5-6 | 6.8 - 7.10 |
 
 
 You will need to these Ansible role dependencies:
